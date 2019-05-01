@@ -11,8 +11,8 @@
 				<li><a href="sass.html">About</a></li>
 				<li><a href="badges.html">Tips</a></li>
 				<li>
-					<a href="{{ url('end-day')}}" class="waves-effect waves-light btn z-depth-3">End Day<i class="material-icons right">attach_money
-					</i></a>
+					<a href="{{ url('end-day')}}" class="waves-effect waves-light btn z-depth-3">End Day<i class="material-icons right">attach_money</i>
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -74,7 +74,6 @@
 		<p>{{ session('deleted') }}</p>
 	</div>
 	@endif
-
 
 	<div class="row">
 		@if(count($person) > 0)

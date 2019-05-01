@@ -61,7 +61,7 @@ class TipsController extends Controller
         $person->name = $request->name;
         $person->hours = $request->hours;
         $person->save();
-        session()->flash('success', 'User added succesfully');
+        session()->flash('success', 'User added successfully');
         return redirect('/tips');
     }
 
@@ -135,7 +135,7 @@ class TipsController extends Controller
     public function destroy($id)
     {
         $person = Tip::findOrFail($id)->delete();
-        session()->flash('deleted', 'User deleted succesfully');
+        session()->flash('deleted', 'User deleted successfully');
         return redirect('/tips');
     }
 }
