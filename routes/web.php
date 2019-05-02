@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('master');
+    return view('layout.home');
 });
 
 Route::get('/about', function () {
@@ -26,13 +26,6 @@ Route::get('/create', function () {
 Route::get('/show', function () {
     return view('layout.show');
 });
-
-// Route::get('/tips', function () {
-// 	// session(['key' => 'john']);
-
-// 	 // session()->forget('key');
-//     return view('tips.tips-grid');
-// });
 
 Route::get('/tips', 'TipsController@index');
 Route::post('/tips', 'TipsController@store');
