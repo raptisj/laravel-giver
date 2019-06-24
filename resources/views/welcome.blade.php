@@ -15,3 +15,6 @@ return session('key');
 
 {{-- forget data --}}
 session()->forget('key');
+
+{{-- make model and migration --}}
+php artisan make:model AllTips -m

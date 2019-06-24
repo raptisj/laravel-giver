@@ -67,30 +67,30 @@ class TipsController extends Controller
 
     public function addTotal(Request $request) 
     {
-      $request->validate([
-        'total_tips' => 'required|numeric',
-    ]);
+        $request->validate([
+            'total_tips' => 'required|numeric',
+        ]);
 
-      session(['key' => $request->total_tips]);
+        session(['key' => $request->total_tips]);
 
-      return redirect('/tips');
-  }
+        return redirect('/tips');
+    }
 
 
-  public function endDay()
-  {
-    $person = Tip::all();
-    $summedHours = $person->pluck('hours')->reduce(function ($carry, $item) {
-        return $carry + $item;
-    });
+    public function endDay()
+    {
+        $person = Tip::all();
+        $summedHours = $person->pluck('hours')->reduce(function ($carry, $item) {
+            return $carry + $item;
+        });
 
-    $baseTip = session('key') / $summedHours; 
+        $baseTip = session('key') / $summedHours; 
 
-    $person->map(function ($item, $key) use ($baseTip) {
-        return Tip::whereId($item->id)->update(['ammount' => $item->hours * $baseTip]);
-    });
-    return redirect('/tips');
-}
+        $person->map(function ($item, $key) use ($baseTip) {
+            return Tip::whereId($item->id)->update(['ammount' => $item->hours * $baseTip]);
+        });
+        return redirect('/tips');
+    }
 
     /**
      * Display the specified resource.
@@ -99,7 +99,7 @@ class TipsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    { 
         //
     }
 
