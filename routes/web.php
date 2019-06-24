@@ -27,9 +27,8 @@ Route::get('/show', function () {
     return view('layout.show');
 });
 
-Route::get('/all-tips', function () {
-	return view('tips.all-tips');
-});
+
+Route::get('/all-tips', 'HistoryController@index');
 
 Route::get('/tips', 'TipsController@index');
 Route::post('/tips', 'TipsController@store');

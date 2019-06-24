@@ -42,7 +42,7 @@
 					</div>
 					<div class="input-field">
 						<label for="hours">Add Hours</label>
-						<input type="number" id="hours" name="hours" />
+						<input type="number" step="any" id="hours" name="hours" />
 					</div>
 					<button type="submit" class="btn-floating btn-large waves-effect waves-light red z-depth-3"><i class="material-icons">add</i></button>
 				</form>

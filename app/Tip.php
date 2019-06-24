@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tip extends Model
 {
-     protected $fillable = [
-    	'name', 'hours', 'ammount', 'total_tips',
-    ];
+	protected $fillable = [
+		'name', 'hours', 'ammount', 'total_tips', 'history_id',
+	];
 }

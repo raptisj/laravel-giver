@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tip;
-use App\TotalTips;
+use App\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -31,6 +31,9 @@ class TipsController extends Controller
     public function index()
     {
         // $tips = Tip::all();
+
+        $history = new History;
+        $history->save();
         return view('tips.tips-grid', compact('person', 'summedHours'));
     }
 
@@ -54,13 +57,17 @@ class TipsController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'hours' => 'required',
+            'hours' => 'required|numeric',
         ]);
 
         $person = new Tip;
         $person->name = $request->name;
         $person->hours = $request->hours;
+        // $person->history_id = History::eachTips()->id;
         $person->save();
+        
+        // $history = new History;
+        // $person->history_id = 'htht';
         session()->flash('success', 'User added successfully');
         return redirect('/tips');
     }
@@ -89,7 +96,19 @@ class TipsController extends Controller
         $person->map(function ($item, $key) use ($baseTip) {
             return Tip::whereId($item->id)->update(['ammount' => $item->hours * $baseTip]);
         });
-        return redirect('/tips');
+
+        // $history = new History;
+        // $history->save();
+        // $op = $history->id;
+
+        // $te = $person->map(function ($item, $key) use ($op) {
+        //      return $item->history_id = 'hello';
+        // });
+        // dd($te);
+        // dd($history->id);
+
+        session()->forget('key');
+        return redirect('/all-tips');
     }
 
     /**
