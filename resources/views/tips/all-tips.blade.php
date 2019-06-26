@@ -10,8 +10,11 @@
 	@foreach($history as $eachRound)
 	<li>{{ $eachRound->id }}</li>
 	@endforeach
-</ul>
 
+	@foreach($history->first()->eachTip as $someTip)
+	<li>{{ $someTip->name }}</li>
+	@endforeach
+</ul>
 
 @include('partials.footer')
 

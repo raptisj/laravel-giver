@@ -16,18 +16,15 @@ class CreateTipsTable extends Migration
         Schema::create('tips', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->integer('history_id')->default(0);
+            $table->unsignedInteger('history_id')->default(0);
             // $table->foreign('history_id')->references('id')->on('histories');
 
             $table->string('name');
             $table->float('hours', 0, 2);
             $table->integer('ammount')->default(0);
             $table->timestamps();
-
-         
         });
     }
-
     /**
      * Reverse the migrations.
      *
