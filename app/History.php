@@ -8,8 +8,8 @@ class History extends Model
 {
 	protected $guarded = [];
 
-	public function eachTip() 
+	public function tipsRound() 
 	{
-		return $this->hasMany(Tip::class);
+		return $this->hasMany(TipRound::class);
 	}
 } 

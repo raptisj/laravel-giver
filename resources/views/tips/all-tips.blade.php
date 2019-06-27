@@ -9,11 +9,14 @@
 <ul>
 	@foreach($history as $eachRound)
 	<li>{{ $eachRound->id }}</li>
+	<li>{{ $eachRound->days_total }}</li>
 	@endforeach
 
-	@foreach($history->first()->eachTip as $someTip)
-	<li>{{ $someTip->name }}</li>
+{{-- 	@isset($historyTips)
+	@foreach($historyTips->tipsRound as $someTip)
+	<li>{{ $someTip->days_total }}</li>
 	@endforeach
+	@endisset --}}
 </ul>
 
 @include('partials.footer')

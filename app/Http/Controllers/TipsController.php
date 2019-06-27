@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tip;
+use App\TipRound;
 use App\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -21,10 +22,29 @@ class TipsController extends Controller
         $summedHours = $person->pluck('hours')->reduce(function ($carry, $item) {
             return $carry + $item;
         });
-        // $this->endDay($sumedHours);
-         // $test = View::share('sumedHours', $sumedHours);
+
         View::share('summedHours', $summedHours);
         View::share('person', $person);
+    }
+
+   //  public function test() 
+   //  {
+   //     $person = Tip::all();
+   //     $summedHours = $person->pluck('hours')->reduce(function ($carry, $item) {
+   //      return $carry + $item;
+   //  });
+
+   //     View::share('summedHours', $summedHours);
+   //     View::share('person', $person);
+   // }
+
+
+    public function initHistory($tipRound) 
+    {
+        $history = new History;
+        $history->save();
+        $tipRound->historie_id = $history->id;
+        $tipRound->save();
     }
 
 
@@ -32,8 +52,8 @@ class TipsController extends Controller
     {
         // $tips = Tip::all();
 
-        $history = new History;
-        $history->save();
+        // $history = new History;
+        // $history->save();
         return view('tips.tips-grid', compact('person', 'summedHours'));
     }
 
@@ -63,12 +83,10 @@ class TipsController extends Controller
         $person = new Tip;
         $person->name = $request->name;
         $person->hours = $request->hours;
-        // $person->history_id = History::eachTips()->id;
         $person->save();
         
-        // $history = new History;
-        // $person->history_id = 'htht';
         session()->flash('success', 'User added successfully');
+
         return redirect('/tips');
     }
 
@@ -90,6 +108,7 @@ class TipsController extends Controller
         $summedHours = $person->pluck('hours')->reduce(function ($carry, $item) {
             return $carry + $item;
         });
+        // $this->test();
 
         $baseTip = session('key') / $summedHours; 
 
@@ -97,17 +116,12 @@ class TipsController extends Controller
             return Tip::whereId($item->id)->update(['ammount' => $item->hours * $baseTip]);
         });
 
-        // $history = new History;
-        // $history->save();
-        // $op = $history->id;
-
-        // $te = $person->map(function ($item, $key) use ($op) {
-        //      return $item->history_id = 'hello';
-        // });
-        // dd($te);
-        // dd($history->id);
+        $tipRound = new TipRound;
+        $tipRound->days_total = session('key');
+        $this->initHistory($tipRound);
 
         session()->forget('key');
+
         return redirect('/all-tips');
     }
 
@@ -154,7 +168,9 @@ class TipsController extends Controller
     public function destroy($id)
     {
         $person = Tip::findOrFail($id)->delete();
+
         session()->flash('deleted', 'User deleted successfully');
+
         return redirect('/tips');
     }
 }
