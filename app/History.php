@@ -8,7 +8,7 @@ class History extends Model
 {
 	protected $guarded = [];
 
-	public function tipsRound() 
+	public function round() 
 	{
 		return $this->hasMany(TipRound::class);
 	}
